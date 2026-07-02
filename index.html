@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GearDrive | Premium Car Accessories</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-900 text-gray-100 font-sans antialiased selection:bg-orange-500 selection:text-white">
+
+    <nav class="sticky top-0 z-40 bg-gray-900/90 backdrop-blur-md border-b border-gray-800 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <i data-lucide="car" class="w-8 h-8 text-orange-500"></i>
+                <span class="text-xl font-black tracking-wider uppercase bg-gradient-to-r from-orange-500 to-amber-400 bg-clip-text text-transparent">GearDrive</span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="#" class="hover:text-orange-500 transition-colors">Home</a>
+                <a href="#shop" class="hover:text-orange-500 transition-colors">Shop All</a>
+                <a href="#" class="hover:text-orange-500 transition-colors">New Arrivals</a>
+                <a href="#" class="hover:text-orange-500 transition-colors">Support</a>
+            </div>
+
+            <button onclick="toggleCart()" class="relative p-2 text-gray-300 hover:text-orange-500 transition-colors focus:outline-none">
+                <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                <span id="cart-count" class="absolute -top-1 -right-1 bg-orange-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center hidden">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <header class="relative bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 py-24 px-4 overflow-hidden border-b border-gray-800">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="space-y-6">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-orange-500/10 text-orange-400 border border-orange-500/20">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Premium Upgrade
+                </span>
+                <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-none">
+                    Upgrade Your <span class="text-orange-500">Drive</span>
+                </h1>
+                <p class="text-lg text-gray-400 max-w-lg">
+                    Discover premium interior comfort, high-end electronics, and rugged exterior gear engineered to elevate your daily journey.
+                </p>
+                <div class="pt-2">
+                    <a href="#shop" class="inline-flex items-center gap-2 px-6 py-3 bg-orange-500 hover:bg-orange-600 active:scale-95 text-white font-semibold rounded-lg shadow-lg shadow-orange-500/20 transition-all">
+                        Explore Shop <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="flex justify-center relative">
+                <div class="absolute w-72 h-72 bg-orange-500/10 rounded-full blur-3xl -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+                <div class="w-full max-w-sm bg-gradient-to-br from-gray-800 to-gray-800/40 p-8 rounded-2xl border border-gray-700/60 shadow-2xl transform hover:rotate-2 transition-transform duration-300">
+                    <div class="flex justify-between items-start mb-6">
+                        <i data-lucide="cpu" class="w-12 h-12 text-orange-500 bg-orange-500/10 p-2.5 rounded-xl"></i>
+                        <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md">In Stock</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-1">UltraDrive 4K Dashcam</h3>
+                    <p class="text-sm text-gray-400 mb-6">Built-in GPS, Night Vision, and AI Collision Warnings.</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-2xl font-black text-white">$149.99</span>
+                        <button onclick="addToCart(1)" class="p-2.5 bg-gray-700 hover:bg-orange-500 hover:text-white rounded-lg text-gray-300 transition-colors">
+                            <i data-lucide="plus" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main id="shop" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div>
+                <h2 class="text-3xl font-extrabold text-white tracking-tight">Featured Accessories</h2>
+                <p class="text-gray-400 mt-1">Filter by category to find the perfect match for your vehicle.</p>
+            </div>
+            
+            <div class="flex flex-wrap gap-2 bg-gray-800/60 p-1.5 rounded-xl border border-gray-700/50 self-start md:self-auto">
+                <button onclick="filterCategory('all')" id="tab-all" class="px-4 py-2 text-sm font-medium rounded-lg transition-all bg-orange-500 text-white">All</button>
+                <button onclick="filterCategory('interior')" id="tab-interior" class="px-4 py-2 text-sm font-medium rounded-lg text-gray-400 hover:text-white transition-all">Interior</button>
+                <button onclick="filterCategory('exterior')" id="tab-exterior" class="px-4 py-2 text-sm font-medium rounded-lg text-gray-400 hover:text-white transition-all">Exterior</button>
+                <button onclick="filterCategory('electronics')" id="tab-electronics" class="px-4 py-2 text-sm font-medium rounded-lg text-gray-400 hover:text-white transition-all">Electronics</button>
+            </div>
+        </div>
+
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            </div>
+    </main>
+
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 w-full sm:w-96 bg-gray-800 border-l border-gray-700 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col hidden">
+        <div class="p-6 border-b border-gray-700 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <i data-lucide="shopping-bag" class="w-5 h-5 text-orange-500"></i>
+                <h2 class="text-lg font-bold text-white">Your Cart</h2>
+            </div>
+            <button onclick="toggleCart()" class="p-1 hover:bg-gray-700 rounded-lg text-gray-400 hover:text-white transition-colors">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <div id="cart-empty" class="text-center py-12 text-gray-500 space-y-3">
+                <i data-lucide="shopping-cart" class="w-12 h-12 mx-auto stroke-1"></i>
+                <p class="text-sm">Your shopping cart is completely empty</p>
+            </div>
+        </div>
+
+        <div class="p-6 border-t border-gray-700 bg-gray-800/50 space-y-4">
+            <div class="flex items-center justify-between text-sm text-gray-400">
+                <span>Subtotal</span>
+                <span id="cart-subtotal" class="text-lg font-bold text-white">$0.00</span>
+            </div>
+            <button onclick="processCheckout()" class="w-full py-3 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-xl shadow-lg shadow-orange-500/10 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+                Proceed to Checkout <i data-lucide="credit-card" class="w-4 h-4"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="cart-backdrop" onclick="toggleCart()" class="fixed inset-0 bg-black/60 z-40 hidden backdrop-blur-sm"></div>
+
+    <script>
+        const API_URL = "http://localhost:5000/api";
+        let products = [];
+        let cart = [];
+
+        // Fetch products dynamically from Node backend API
+        async function fetchProducts() {
+            try {
+                const response = await fetch(`${API_URL}/products`);
+                products = await response.json();
+                renderProducts();
+            } catch (error) {
+                console.error("Error fetching items from backend:", error);
+            }
+        }
+
+        // Send cart data over to local Node server
+        async function processCheckout() {
+            if (cart.length === 0) return alert("Your cart is empty!");
+
+            try {
+                const response = await fetch(`${API_URL}/checkout`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ cartItems: cart })
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert(`🎉 Checkout Success!\nOrder ID: ${result.orderId}\nTotal Paid: $${result.total.toFixed(2)}`);
+                    cart = []; // Reset cart tracking state array
+                    updateCartUI();
+                    toggleCart();
+                }
+            } catch (error) {
+                alert("Checkout communication failed. Check if your Node console server.js is running.");
+            }
+        }
+
+        function renderProducts(filter = 'all') {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+            
+            const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+            
+            filtered.forEach(p => {
+                grid.innerHTML += `
+                    <div class="bg-gray-800 border border-gray-700/70 rounded-xl p-5 flex flex-col justify-between hover:border-gray-600 transition-all duration-200 group">
+                        <div>
+                            <div class="w-full aspect-square bg-gray-900 rounded-lg mb-4 flex items-center justify-center text-gray-600 group-hover:text-orange-500 transition-colors border border-gray-800">
+                                <i data-lucide="${p.icon}" class="w-12 h-12 stroke-1"></i>
+                            </div>
+                            <span class="text-xs uppercase font-bold tracking-wider text-orange-400/80">${p.category}</span>
+                            <h3 class="text-md font-bold text-white mt-1 group-hover:text-orange-400 transition-colors">${p.name}</h3>
+                            <p class="text-xs text-gray-400 mt-1.5 leading-relaxed">${p.desc}</p>
+                        </div>
+                        <div class="flex items-center justify-between mt-6 pt-3 border-t border-gray-700/50">
+                            <span class="text-lg font-black text-white">$${p.price.toFixed(2)}</span>
+                            <button onclick="addToCart(${p.id})" class="inline-flex items-center gap-1 px-3 py-1.5 bg-gray-700 text-gray-200 hover:bg-orange-500 hover:text-white rounded-lg text-xs font-semibold transition-colors">
+                                Add <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            lucide.createIcons();
+        }
+
+        function filterCategory(cat) {
+            ['all', 'interior', 'exterior', 'electronics'].forEach(c => {
+                const tab = document.getElementById(`tab-${c}`);
+                if(c === cat) {
+                    tab.className = "px-4 py-2 text-sm font-medium rounded-lg transition-all bg-orange-500 text-white";
+                } else {
+                    tab.className = "px-4 py-2 text-sm font-medium rounded-lg text-gray-400 hover:text-white transition-all";
+                }
+            });
+            renderProducts(cat);
+        }
+
+        function addToCart(id) {
+            const prod = products.find(p => p.id === id);
+            const existing = cart.find(item => item.id === id);
+            if(existing) {
+                existing.qty++;
+            } else {
+                cart.push({ ...prod, qty: 1 });
+            }
+            updateCartUI();
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const countEl = document.getElementById('cart-count');
+            const container = document.getElementById('cart-items');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            
+            const totalItems = cart.reduce((acc, curr) => acc + curr.qty, 0);
+            countEl.textContent = totalItems;
+            if(totalItems > 0) countEl.classList.remove('hidden');
+            else countEl.classList.add('hidden');
+
+            if(cart.length === 0) {
+                container.innerHTML = `
+                    <div id="cart-empty" class="text-center py-12 text-gray-500 space-y-3">
+                        <i data-lucide="shopping-cart" class="w-12 h-12 mx-auto stroke-1"></i>
+                        <p class="text-sm">Your shopping cart is completely empty</p>
+                    </div>`;
+                subtotalEl.textContent = "$0.00";
+                lucide.createIcons();
+                return;
+            }
+
+            container.innerHTML = '';
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                subtotal += item.price * item.qty;
+                container.innerHTML += `
+                    <div class="flex items-center justify-between gap-4 bg-gray-900/40 p-3 rounded-lg border border-gray-700/60">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-gray-800 rounded flex items-center justify-center text-orange-500 border border-gray-700">
+                                <i data-lucide="${item.icon}" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-white max-w-[160px] truncate">${item.name}</h4>
+                                <p class="text-xs text-gray-400">$${item.price.toFixed(2)} x ${item.qty}</p>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart(${item.id})" class="p-1.5 hover:bg-red-500/10 text-gray-500 hover:text-red-400 rounded-md transition-colors">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                `;
+            });
+            subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+            lucide.createIcons();
+        }
+
+        function toggleCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            const backdrop = document.getElementById('cart-backdrop');
+            
+            sidebar.classList.toggle('hidden');
+            backdrop.classList.toggle('hidden');
+            
+            setTimeout(() => {
+                sidebar.classList.toggle('translate-x-full');
+            }, 10);
+        }
+
+        // Run application setup on page initial fetch
+        fetchProducts();
+    </script>
+</body>
+</html>
